@@ -5,7 +5,7 @@ import json
 class MazeSettings:
     def __init__(self, rewards: [[]], max_steps: int):
         if(type(rewards) == type('')):
-            rewards = np.matrix(rewards).tolist()
+            rewards = json.loads(rewards)
         self.RewardsMatrix: [[]] = rewards
         self.MaximumSteps: int = max_steps
 

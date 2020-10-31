@@ -4,7 +4,7 @@ from flask import jsonify, request
 
 app = flask.Flask(__name__)
 #app.config["DEBUG"] = True
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 @app.route('/maze2d/solve', methods=['POST'])
 def solve_maze2d():
