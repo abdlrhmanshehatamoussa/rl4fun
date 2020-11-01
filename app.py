@@ -4,7 +4,7 @@ from flask import jsonify, request
 
 app = flask.Flask(__name__)
 #app.config["DEBUG"] = True
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 
 @app.route('/maze2d/solve', methods=['POST'])
 def solve_maze2d():
@@ -46,7 +46,7 @@ def solve_maze2d():
         solution["version"] = VERSION
         return jsonify(solution)
     except Exception as err:
-        return jsonify({'error':str(err)})
+        return jsonify({"version":VERSION,'error':str(err)})
 
 if __name__ == '__main__':
     app.run()

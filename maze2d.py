@@ -5,7 +5,10 @@ import json
 class MazeSettings:
     def __init__(self, rewards: [[]], max_steps: int):
         if(type(rewards) == type('')):
-            rewards = json.loads(rewards)
+            try:
+                rewards = json.loads(rewards)
+            except Exception as err:
+                raise Exception("Error while parsing rewards matrix: %s" % str(err))
         self.RewardsMatrix: [[]] = rewards
         self.MaximumSteps: int = max_steps
 
