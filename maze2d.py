@@ -26,6 +26,7 @@ class Maze2D:
         self.Sc = self.Si
         self.TakenSteps = 0
         self.MaxSteps = max_steps
+        self.OriginalRewardsMatrix = rewards
         self.Rewards = np.concatenate(rewards, axis=0)
 
     def reset(self):
@@ -175,7 +176,7 @@ class Maze2DSolver:
         for q in qs:
             trial = {}
             sln, score = self.run(q)
-            trial['solution'] = [int(a) for a in sln]
+            trial['solution'] = [self.env.flat2mat(a) for a in sln]
             trial['score'] = int(score)
             trials.append(trial)
         return trials
@@ -218,13 +219,14 @@ class Maze2DSolver:
             response["history"] = trials
 
         answer, score = self.run(trained_q)
+        response["rewards"] = self.env.OriginalRewardsMatrix
         response["score"] = int(score)
-        response["answer"] = [int(a) for a in answer]
+        response["answer"] = [self.env.flat2mat(a) for a in answer]
         return response
 
 
 if __name__ == "__main__":
-    solver_settings = MazeSolverSettings(0.95, 0.0001, False)
+    solver_settings = MazeSolverSettings(0.95, 0.0001, True)
     maze_settings = MazeSettings([
         [-2, -2, -2],
         [-2, -2, -2],

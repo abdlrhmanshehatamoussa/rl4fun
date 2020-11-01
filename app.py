@@ -1,10 +1,11 @@
 import flask
 from maze2d import Maze2D, Maze2DSolver, MazeSettings, MazeSolverSettings
 from flask import jsonify, request
+import json
 
 app = flask.Flask(__name__)
 #app.config["DEBUG"] = True
-VERSION = "1.1.1"
+VERSION = "1.2.0"
 
 @app.route('/maze2d/solve', methods=['POST'])
 def solve_maze2d():
@@ -44,7 +45,7 @@ def solve_maze2d():
         solver = Maze2DSolver(maze,solver_settings)
         solution = solver.solve()
         solution["version"] = VERSION
-        return jsonify(solution)
+        return json.dumps(solution,separators=(',', ':'))
     except Exception as err:
         return jsonify({"version":VERSION,'error':str(err)})
 
