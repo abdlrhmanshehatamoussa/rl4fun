@@ -176,7 +176,7 @@ class Maze2DSolver:
         for q in qs:
             trial = {}
             sln, score = self.run(q)
-            trial['solution'] = [self.env.flat2mat(a) for a in sln]
+            trial['solution'] = [list(reversed(self.env.flat2mat(a))) for a in sln]
             trial['score'] = int(score)
             trials.append(trial)
         return trials
@@ -221,7 +221,7 @@ class Maze2DSolver:
         answer, score = self.run(trained_q)
         response["rewards"] = self.env.OriginalRewardsMatrix
         response["score"] = int(score)
-        response["answer"] = [self.env.flat2mat(a) for a in answer]
+        response["answer"] = [list(reversed(self.env.flat2mat(a))) for a in answer]
         return response
 
 

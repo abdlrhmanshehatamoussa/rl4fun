@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = flask.Flask(__name__)
 CORS(app)
 #app.config["DEBUG"] = True
-VERSION = "1.3.0"
+VERSION = "1.3.1"
 
 @app.route('/maze2d/solve', methods=['POST'])
 def solve_maze2d():
